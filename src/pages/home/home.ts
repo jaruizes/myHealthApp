@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
-import {Medicion} from '../../model/medicion';
-
-import {Mediciones} from "../../model/mediciones";
+import {Measurement} from '../../model/measurement';
+import {MeasurementService} from '../../services/measurement.service';
 
 @Component({
   selector: 'page-home',
@@ -9,26 +8,21 @@ import {Mediciones} from "../../model/mediciones";
 })
 export class HomePage {
 
-  medicion: Medicion;
-  mediciones: Mediciones;
+  measurements: Measurement[];
+  measurement: Measurement;
 
-  constructor() {
-    let fecha = new Date();
-    let hora = fecha.getHours();
-    let minutos = fecha.getMinutes();
-    // TIP: string interpolation.
-    let horaStr: string = hora >= 9 ? `${hora}` : `0${hora}`;
-    let minutosStr: string = minutos >= 9 ? `${minutos}` : `0${minutos}`;
-
-    this.medicion = new Medicion();
-    this.medicion.fecha = fecha.toISOString();
-    // TIP: string interpolation.
-    this.medicion.hora = `${horaStr}:${minutosStr}`;
+  constructor(private _measurementSrv: MeasurementService) {
+    this.measurements = _measurementSrv.getAll();
+    this.measurement = new Measurement();
+    console.log(this.measurements);
   }
 
-  guardar() {
+  addMeasurement() {
     console.log('Adding medicion........');
-    this.mediciones.addMedicion(this.medicion);
+    this._measurementSrv.add(this.measurement);
+    this.measurements = this._measurementSrv.getAll();
+    this.measurement = new Measurement();
+    console.log('--> ' + this.measurements.length)
   }
 
 }

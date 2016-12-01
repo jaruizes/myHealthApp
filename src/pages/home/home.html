@@ -13,12 +13,22 @@
       <ion-item>
         <ion-icon name="ice-cream" item-left></ion-icon>
         <ion-label color="primary">Nivel de glucosa:</ion-label>
-        <ion-input type="number" placeholder="mg / dl" [(ngModel)]="medicion.glucosa"></ion-input>
+        <ion-input type="number" placeholder="mg / dl" [(ngModel)]="measurement.glucose"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-icon name="heart" item-left></ion-icon>
-        <ion-label color="primary">Tensión arterial:</ion-label>
-        <ion-input type="number" placeholder="mmHg" item-right [(ngModel)]="medicion.tension"></ion-input>
+        <ion-icon name="water" item-left ></ion-icon>
+        <ion-label color="primary">Tensión sistólica:</ion-label>
+        <ion-input type="number" placeholder="mmHg" item-right [(ngModel)]="measurement.systolicPressure"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="water" item-left ></ion-icon>
+        <ion-label color="primary">Tensión diastólica:</ion-label>
+        <ion-input type="number" placeholder="mmHg" item-right [(ngModel)]="measurement.diastolicPressure"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="heart" item-left ></ion-icon>
+        <ion-label color="primary">Pulsaciones:</ion-label>
+        <ion-input type="number" placeholder="mmHg" item-right [(ngModel)]="measurement.pulses"></ion-input>
       </ion-item>
     </ion-item-group>
     <ion-item-divider color="primary">
@@ -29,17 +39,17 @@
         <ion-item>
           <ion-icon name="calendar" item-left></ion-icon>
           <ion-label color="primary">Fecha:</ion-label>
-          <ion-datetime displayFormat="DD MMMM YYYY" min="2016" max="2020" [(ngModel)]="medicion.fecha"></ion-datetime>
+          <ion-datetime displayFormat="DD/MM/YYYY" min="2016" max="2020" [(ngModel)]="measurement.date"></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-icon name="clock" item-left></ion-icon>
           <ion-label color="primary">Hora:</ion-label>
-          <ion-datetime displayFormat="HH:mm" [(ngModel)]="medicion.hora"></ion-datetime>
+          <ion-datetime displayFormat="HH:mm" [(ngModel)]="measurement.time"></ion-datetime>
         </ion-item>
       </ion-item-group>
     </ion-item-group>
     <ion-item-group>
-      <button ion-button color="secondary" round  style="width: 100%;margin-top: 10px" (click)="guardar()" disabled="[(!medicion.glucosa && !medicion.tension)]">
+      <button ion-button color="secondary" round  style="width: 100%;margin-top: 10px" (click)="addMeasurement()">
         <ion-label>Guardar</ion-label>
       </button>
     </ion-item-group>
